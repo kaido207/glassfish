@@ -62,8 +62,6 @@
             valueMap=>$pageSession{valueMap});
         mapPut(map="#{pageSession.valueMap}" key="enabled" value="true");
 
-        setPageSessionAttribute(key="reload" value="#{false}" );
-
         //To get the resource types
       if ("#{pageSession.valueMap.resAdapter}"){
         createMap(result="#{pageSession.attrsMap}");

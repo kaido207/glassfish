@@ -82,8 +82,7 @@
     setPageSessionAttribute(key="showCancelButton" value="#{true}" );
     setPageSessionAttribute(key="hasPropertySheet" value="#{true}" );
     setPageSessionAttribute(key="hasPropertyTable" value="#{true}" );
-    setPageSessionAttribute(key="reload" value="#{false}" );
-    
+   
     setPageSessionAttribute(key="convertToFalseList2" value={"enabled"});
 
     gf.getAdminObjectResourceWizard(
