@@ -1,5 +1,6 @@
 <!--
 
+    Copyright (c) 2024 Contributors to the Eclipse Foundation.
     Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
@@ -35,12 +36,20 @@
                 />
             <sun:button id="addSharedTableButton" disabled="#{false}" text="$resource{i18n.button.AddProperty}" >   
                 <!command
+		    if ("#{pageSession.isConcurrent}=true") {
+                        convertArrayToCommaString(array="#{pageSession.contextInfo}"  commaString="#{requestScope.tmp}");
+                        mapPut(map="#{pageSession.valueMap}" key="contextInfo" value="#{requestScope.tmp}");
+                    }
                     getUIComponent(clientId="$pageSession{propertyTableRowGroupId}", component=>$attribute{tableRowGroup});
                     addRowToTable(TableRowGroup="$attribute{tableRowGroup}", NameList={"name", "value", "description"});
                 />                                 
             </sun:button>
             <sun:button id="button1" text="$resource{i18n.button.DeleteProperties}" disabled="#{true}" primary="#{false}">
                 <!command
+                    if ("#{pageSession.isConcurrent}=true") {
+                        convertArrayToCommaString(array="#{pageSession.contextInfo}"  commaString="#{requestScope.tmp}");
+                        mapPut(map="#{pageSession.valueMap}" key="contextInfo" value="#{requestScope.tmp}");
+                    }
                     getUIComponent(clientId="$pageSession{propertyTableRowGroupId}", component=>$attribute{trg});   
                     getSelectedTableRowKeys(tableRowGroup="${trg}" rowKeys=>$attribute{rowKeys});
                     deleteTableRows(tableRowGroup="${trg}" rowKeys="${rowKeys}");
