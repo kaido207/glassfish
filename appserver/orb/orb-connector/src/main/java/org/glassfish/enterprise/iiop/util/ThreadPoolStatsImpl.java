@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2025 Contributors to the Eclipse Foundation
  * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -57,18 +58,32 @@ public class ThreadPoolStatsImpl
     private BoundedRangeStatisticImpl averageTimeInQueue;
     private static final String stringNumberOfBusyThreads =
             MonitoringConstants.THREADPOOL_NUMBER_OF_BUSY_THREADS;
+    private static final String stringNumberOfBusyThreadsDescription =
+            MonitoringConstants.THREADPOOL_NUMBER_OF_BUSY_THREADS_DESCRIPTION;
     private static final String stringNumberOfAvailableThreads =
             MonitoringConstants.THREADPOOL_NUMBER_OF_AVAILABLE_THREADS;
+    private static final String stringNumberOfAvailableThreadsDescription =
+            MonitoringConstants.THREADPOOL_NUMBER_OF_AVAILABLE_THREADS_DESCRIPTION;
     private static final String stringCurrentNumberOfThreads =
             MonitoringConstants.THREADPOOL_CURRENT_NUMBER_OF_THREADS;
+    private static final String stringCurrentNumberOfThreadsDescription =
+            MonitoringConstants.THREADPOOL_CURRENT_NUMBER_OF_THREADS_DESCRIPTION;
     private static final String stringAverageWorkCompletionTime =
             MonitoringConstants.THREADPOOL_AVERAGE_WORK_COMPLETION_TIME;
+    private static final String stringAverageWorkCompletionTimeDescription =
+            MonitoringConstants.THREADPOOL_AVERAGE_WORK_COMPLETION_TIME_DESCRIPTION;
     private static final String stringTotalWorkItemsAdded =
             MonitoringConstants.WORKQUEUE_TOTAL_WORK_ITEMS_ADDED;
+    private static final String stringTotalWorkItemsAddedDescription =
+            MonitoringConstants.WORKQUEUE_TOTAL_WORK_ITEMS_ADDED_DESCRIPTION;
     private static final String stringNumberOfWorkItemsInQueue =
             MonitoringConstants.WORKQUEUE_WORK_ITEMS_IN_QUEUE;
+    private static final String stringNumberOfWorkItemsInQueueDescription =
+            MonitoringConstants.WORKQUEUE_WORK_ITEMS_IN_QUEUE_DESCRIPTION;
     private static final String stringAverageTimeInQueue =
             MonitoringConstants.WORKQUEUE_AVERAGE_TIME_IN_QUEUE;
+    private static final String stringAverageTimeInQueueDescription =
+            MonitoringConstants.WORKQUEUE_AVERAGE_TIME_IN_QUEUE_DESCRIPTION;
 
     public ThreadPoolStatsImpl(ThreadPool threadPool) throws NoSuchWorkQueueException {
         this.threadPool = threadPool;
@@ -97,27 +112,27 @@ public class ThreadPoolStatsImpl
 
         numberOfBusyThreads =
                 new CountStatisticImpl(threadPool.numberOfBusyThreads(), stringNumberOfBusyThreads, "COUNT",
-                threadPool.getWorkQueue(0).toString(),
+                stringNumberOfBusyThreadsDescription,
                 time, time);
 
         numberOfAvailableThreads =
                 new CountStatisticImpl(
                 threadPool.numberOfAvailableThreads(), stringNumberOfAvailableThreads, "count",
-                threadPool.getWorkQueue(0).toString(),
+                stringNumberOfAvailableThreadsDescription,
                 time, time);
 
         currentNumberOfThreads =
                 new BoundedRangeStatisticImpl(
                 threadPool.currentNumberOfThreads(), threadPool.maximumNumberOfThreads(), threadPool.minimumNumberOfThreads(), java.lang.Long.MAX_VALUE, 0,
                 stringCurrentNumberOfThreads, "count",
-                threadPool.getWorkQueue(0).toString(),
+                stringCurrentNumberOfThreadsDescription,
                 time, time);
 
         averageWorkCompletionTime =
                 new BoundedRangeStatisticImpl(
                 threadPool.averageWorkCompletionTime(), 0, 0, java.lang.Long.MAX_VALUE, 0,
                 stringAverageWorkCompletionTime, "Milliseconds",
-                threadPool.getWorkQueue(0).toString(),
+                stringAverageWorkCompletionTimeDescription,
                 time, time);
 
         // WorkQueue workItems = threadPool.getWorkQueue(0);
@@ -125,21 +140,21 @@ public class ThreadPoolStatsImpl
         totalWorkItemsAdded =
                 new CountStatisticImpl(
                 workQueue.totalWorkItemsAdded(), stringTotalWorkItemsAdded, "count",
-                workQueue.getName(),
+                stringTotalWorkItemsAddedDescription,
                 time, time);
 
         numberOfWorkItemsInQueue =
                 new BoundedRangeStatisticImpl(
                 workQueue.workItemsInQueue(), 0, 0, java.lang.Long.MAX_VALUE, 0,
                 stringNumberOfWorkItemsInQueue, "count",
-                workQueue.getName(),
+                stringNumberOfWorkItemsInQueueDescription,
                 time, time);
 
         averageTimeInQueue =
                 new BoundedRangeStatisticImpl(
                 workQueue.averageTimeInQueue(), 0, 0, java.lang.Long.MAX_VALUE, 0,
                 stringAverageTimeInQueue, "Milliseconds",
-                workQueue.getName(),
+                stringAverageTimeInQueueDescription,
                 time, time);
 
     }
