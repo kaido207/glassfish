@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2025 Contributors to the Eclipse Foundation
  * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -108,7 +109,7 @@ public class ThreadPoolStatsImpl
 
         currentNumberOfThreads =
                 new BoundedRangeStatisticImpl(
-                threadPool.currentNumberOfThreads(), threadPool.maximumNumberOfThreads(), threadPool.minimumNumberOfThreads(), java.lang.Long.MAX_VALUE, 0,
+                threadPool.currentNumberOfThreads(), 0, 0, threadPool.maximumNumberOfThreads(), threadPool.minimumNumberOfThreads(),
                 stringCurrentNumberOfThreads, "count",
                 threadPool.getWorkQueue(0).toString(),
                 time, time);
